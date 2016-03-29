@@ -1,5 +1,5 @@
 ﻿<h1>{{info}}</h1>
-<form #f="ngForm" *ngIf="activate" (change)="change()">
+<form #f="ngForm" *ngIf="activate">
 
     <div>
         Um einen neuen Datensatz anzulegen, legen Sie eine leere Id fest.
@@ -11,7 +11,12 @@
 
     <div class="form-group">
         <label>Id:</label>
-        <input class="form-control" [(ngModel)]="flug.id" ngControl="id" />
+        <input class="form-control" [(ngModel)]="flug.id" ngControl="id" min="0" max="99999" />
+    
+        <div *ngIf="!f?.controls?.id?.valid">
+            Muss zwischen 0 und 9999 sein!
+        </div>
+
     </div>
 
     <div class="form-group">
@@ -53,7 +58,7 @@
     </div>
     <div class="form-group">
         <label>Datum:</label>
-        <input class="form-control" [(ngModel)]="flug.datum" ngControl="datum" />
+        <input class="form-control" date [(ngModel)]="flug.datum" ngControl="datum" />
     </div>
 
     <div>
